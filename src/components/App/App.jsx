@@ -1,26 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TbUserSearch } from 'react-icons/tb';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactTable } from 'components/ContactTable/ContactTable';
 import { Filter } from 'components/Filter/Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import {
-  addContact,
-  deleteContact,
-  getContacts,
-} from '../../redux/contactsSlice';
 import { getFilterValue } from '../../redux/filterSlice';
 import normalizePhoneNumber from '../../helpers/numberNormalize';
+import {
+  fetchContacts,
+  postContact,
+  deleteContact,
+} from '../../redux/contacts/mockData-api';
 
 export function App() {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(getFilterValue);
 
-  const handleAddContact = (name, number) => {
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const handleAddContact = (name, phone) => {
     dispatch(
-      addContact({ id: nanoid(), name, number: normalizePhoneNumber(number) })
+      postContact({ id: nanoid(), name, phone: normalizePhoneNumber(phone) })
     );
   };
 
@@ -30,13 +34,15 @@ export function App() {
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+    return contacts.filter(
+      contact =>
+        contact.name.toLowerCase().includes(normalizedFilter) &&
+        contact.phone &&
+        contact.phone.toLowerCase() === normalizePhoneNumber(contact.phone)
     );
   };
 
   const visibleContacts = getVisibleContacts();
-
   return (
     <div className="flex gap-4 sm:gap-0 justify-around mx-auto w-9/12 mt-5 p-8 sm:p-2 rounded shadow-xl shadow-shadowBox md:flex-col md:items-center md:text-base  md:px-1.5 md:w-11/12 text-xl text-darkFont min-h-562 select-none bg-gradient-to-tr from-gradientColor1 to-gradientColor2 sm:mt-1">
       <ContactForm onSubmit={handleAddContact} />

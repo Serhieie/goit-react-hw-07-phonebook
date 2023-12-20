@@ -42,7 +42,7 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
         width="42%"
         className="p-1 text-center bg-lightPartsColor  md:text-md ssm:text-sm"
       >
-        {normalizePhoneNumber(contact.number)}
+        {normalizePhoneNumber(contact.phone)}
       </td>
       <td
         width="15%"

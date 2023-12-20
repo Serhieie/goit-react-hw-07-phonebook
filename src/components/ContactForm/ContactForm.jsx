@@ -8,20 +8,20 @@ import normalizePhoneNumber from '../../helpers/numberNormalize';
 import normalizeName from 'helpers/nameNormalize';
 import { ErrorMessage } from 'formik';
 import { useSelector } from 'react-redux';
-import { getContacts } from '../../redux/contactsSlice';
+import { getContacts } from '../../redux/contacts/contactsSlice';
 
 const initialValues = {
   name: '',
-  number: '',
+  phone: '',
 };
 
 export function ContactForm({ onSubmit }) {
   const contacts = useSelector(getContacts);
 
   const handleSubmit = (values, { resetForm }) => {
-    const { name, number } = values;
+    const { name, phone } = values;
 
-    let someNum = normalizePhoneNumber(number);
+    let someNum = normalizePhoneNumber(phone);
     let normName = normalizeName(name);
 
     const isNameExists = contacts.some(
@@ -66,7 +66,7 @@ export function ContactForm({ onSubmit }) {
           <ErrorMessage
             className="text-xl text-errorMsg m-0 p-0 items-center 
               md:w-10/12 md:text-base md2:text-sm"
-            name="number"
+            name="phone"
             component="div"
           />
         </div>

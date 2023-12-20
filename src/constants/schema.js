@@ -7,7 +7,7 @@ export const schema = yup.object().shape({
     .max(18)
     .required()
     .matches(/^[a-zA-Zа-яА-ЯіїґІЇҐ].*$/, 'Name must start with letters'),
-  number: yup
+  phone: yup
     .string()
     .min(7)
     .max(18)

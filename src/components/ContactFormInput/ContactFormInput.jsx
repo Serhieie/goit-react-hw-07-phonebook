@@ -24,7 +24,7 @@ export function Input() {
          md2:text-2 ssm:text-xs md2:text-xs"
       />
       <label
-        htmlFor="number"
+        htmlFor="phone"
         className="mt-6 text-xl flex items-center gap-2 md:ml-2 md:w-10/12
       md:text-4 font-medium md2:text-xs md2:mt-1 sm:mt-2"
       >
@@ -33,8 +33,8 @@ export function Input() {
       </label>
       <Field
         type="tel"
-        name="number"
-        id="number"
+        name="phone"
+        id="phone"
         placeholder="Enter phone number"
         className="text-center w-11/12 py-1 px-5 rounded-sm h-10 bg-lightPartsColor 
         border-0 outline-none mx-auto text-4 text-darkFont placeholder:text-darkFont 
