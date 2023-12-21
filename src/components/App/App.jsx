@@ -41,7 +41,6 @@ export function App() {
 
   const toggleTheme = () => {
     dispatch(setTheme(!isThemeDark));
-    console.log(isThemeDark);
   };
 
   return (
