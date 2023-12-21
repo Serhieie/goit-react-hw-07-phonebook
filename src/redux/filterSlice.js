@@ -28,4 +28,3 @@ export const persistedFilterReducer = persistReducer(
 );
 
 export const { changeFilterValue } = filterSlice.actions;
-export const getFilterValue = state => state.filter.filterValue;

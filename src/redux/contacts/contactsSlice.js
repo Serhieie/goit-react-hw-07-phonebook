@@ -1,10 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts } from './mockData-api';
+import { fetchContacts, postContact, deleteContact } from './mockData-api';
+import { initialState } from './initial';
 
-const initialState = {
-  items: [],
-  isLoading: false,
-  error: null,
+const handlePending = state => {
+  state.isLoading = true;
+};
+const handleFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.items = action.payload;
+  state.error = null;
+};
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
 };
 
 const contactsSlice = createSlice({
@@ -13,21 +21,19 @@ const contactsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchContacts.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.items = action.payload;
-        state.error = null;
-      })
-      .addCase(fetchContacts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      });
+      //FetchAll
+      .addCase(fetchContacts.pending, handlePending)
+      .addCase(fetchContacts.fulfilled, handleFulfilled)
+      .addCase(fetchContacts.rejected, handleRejected)
+      //PostContact
+      .addCase(postContact.pending, handlePending)
+      .addCase(postContact.fulfilled, handleFulfilled)
+      .addCase(postContact.rejected, handleRejected)
+      //DeleteContact
+      .addCase(deleteContact.pending, handlePending)
+      .addCase(deleteContact.fulfilled, handleFulfilled)
+      .addCase(deleteContact.rejected, handleRejected);
   },
 });
 
-export const { addContact, deleteContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
-export const getContacts = state => state.contacts.items;

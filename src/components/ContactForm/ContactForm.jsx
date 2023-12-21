@@ -8,7 +8,7 @@ import normalizePhoneNumber from '../../helpers/numberNormalize';
 import normalizeName from 'helpers/nameNormalize';
 import { ErrorMessage } from 'formik';
 import { useSelector } from 'react-redux';
-import { getContacts } from '../../redux/contacts/contactsSlice';
+import { getContacts } from '../../redux/selectors';
 
 const initialValues = {
   name: '',
@@ -49,22 +49,22 @@ export function ContactForm({ onSubmit }) {
         from-smallWraperGradient1 to-smallWraperGradient2 md:py-7 md:px-5
         md:min-h-0 md:w-[99%]"
       >
-        <h1 className="text-center text-3xl m-0 md:text-xl md2:text-xl font-bold ">
+        <h1 className="text-center text-3xl m-0 md:text-xl md2:text-xl font-normal ">
           Add Contact Field
         </h1>
         <Input />
         <div
-          className="w-full flex justify-center items-center flex-col h-20 mt-2
+          className="w-full flex justify-center font-extralight items-center flex-col h-20 mt-2
           md:text-base md:h-7 sm"
         >
           <ErrorMessage
-            className="text-xl text-errorMsg m-0 p-0 items-center 
+            className="text-xl text-errorMsg m-0 p-0 font-extralight items-center 
               md:w-10/12 md:text-base md2:text-sm"
             name="name"
             component="div"
           />
           <ErrorMessage
-            className="text-xl text-errorMsg m-0 p-0 items-center 
+            className="text-xl text-errorMsg m-0 p-0 font-extralight items-center 
               md:w-10/12 md:text-base md2:text-sm"
             name="phone"
             component="div"
@@ -72,7 +72,7 @@ export function ContactForm({ onSubmit }) {
         </div>
         <button
           type="submit"
-          className="text-center w-40 h-11 rounded-sm bg-buttonColor border-none 
+          className="text-center  font-light w-40 h-11 rounded-sm bg-buttonColor border-none 
             outline-none mx-auto mt-5 cursor-pointer shadow-md shadow-shadowBox
             flex items-center justify-around transition-all duration-300 text-buttonTextColor
             text-4 hover:bg-buttonHoverColor md:w-40 md:h-11 md:mt-4 text-lg md2:w-32 md2:text-sm md2:mt-5"

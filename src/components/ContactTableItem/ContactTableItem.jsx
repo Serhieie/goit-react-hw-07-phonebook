@@ -52,7 +52,7 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
           id="delete-btn"
           onClick={openModal}
           className="bg-buttonColor text-lightPartsColor mx-auto border-none py-1 px-2 text-xs cursor-pointer
-          transition-all duration-300 flex items-center hover:bg-buttonHoverColor rounded-sm"
+          transition-all duration-300 flex items-center hover:bg-buttonHoverColor rounded-sm font-light"
         >
           {windowWidth < 768 ? (
             <AiOutlineUserDelete style={{ marginRight: '4px' }} />
@@ -66,7 +66,7 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Delete Confirmation"
-        className="md:w-[300px]"
+        className="md:w-[320px]"
       >
         <h2
           ref={subtitle}
@@ -85,7 +85,7 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
             className="text-4 bg-deleteBtnColor text-lightPartsColor
             border-none py-3 px-10 rounded-0.5 cursor-pointer transition-all
             duration-300 mx-auto hover:bg-deleteBtnHoverColor md:py-2 md:px-5
-            "
+             font-light"
           >
             Delete
           </button>
@@ -94,7 +94,7 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
             className="text-4 bg-buttonColor text-lightPartsColor
             border-none py-3 px-10 rounded-0.5 cursor-pointer transition-all
             duration-300 mx-auto hover:bg-buttonHoverColor md:py-2 md:px-5
-            "
+            font-light"
           >
             Cancel
           </button>

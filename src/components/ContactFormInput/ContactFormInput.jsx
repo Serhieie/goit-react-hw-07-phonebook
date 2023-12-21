@@ -8,7 +8,7 @@ export function Input() {
       <label
         htmlFor="name"
         className="mt-10 text-xl flex items-center gap-2 md:ml-2 md:w-10/12
-      md2:text-sm font-medium sm:mt-3"
+      md2:text-sm font-light sm:mt-3"
       >
         <LiaUserEditSolid className="ml-3 md:ml-6" />
         Name
@@ -19,14 +19,14 @@ export function Input() {
         id="name"
         placeholder="Enter name"
         className="text-center mx-auto w-11/12 py-1 px-5 rounded-sm h-10 bg-lightPartsColor 
-        border-0 outline-none  text-4 text-darkFont placeholder:text-darkFont 
+        border-0 outline-none  text-4 text-darkFont placeholder:text-darkFont placeholder:font-extralight
          md:w-10/12  md:text-4 md:h-9 md:py-0.5 md:px-2 placeholder:opacity-50 
-         md2:text-2 ssm:text-xs md2:text-xs"
+         md2:text-2 ssm:text-xs md2:text-xs font-light"
       />
       <label
         htmlFor="phone"
         className="mt-6 text-xl flex items-center gap-2 md:ml-2 md:w-10/12
-      md:text-4 font-medium md2:text-xs md2:mt-1 sm:mt-2"
+      md:text-4 font-light md2:text-xs md2:mt-1 sm:mt-2"
       >
         <FiPhoneMissed className="ml-3 md:ml-6 w-[14px] h-[14px]" />
         Phone Number
@@ -39,7 +39,7 @@ export function Input() {
         className="text-center w-11/12 py-1 px-5 rounded-sm h-10 bg-lightPartsColor 
         border-0 outline-none mx-auto text-4 text-darkFont placeholder:text-darkFont 
  md:w-10/12  md:text-4 md:h-9 md:py-0.5 md:px-2 placeholder:opacity-50 
- md2:text-2 ssm:text-xs md2:text-xs"
+ md2:text-2 ssm:text-xs md2:text-xs placeholder:font-extralight font-light"
       />
     </>
   );
