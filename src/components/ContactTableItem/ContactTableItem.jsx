@@ -1,12 +1,13 @@
 import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineUserDelete } from 'react-icons/ai';
 import Modal from 'react-modal';
 import { PulseLoader } from 'react-spinners';
 import normalizePhoneNumber from 'helpers/numberNormalize';
 import { deleteContact } from '../../redux/contacts/mockData-api';
-import { settings } from 'helpers/deleteModalSettings';
+import { settings, settings2 } from 'helpers/deleteModalSettings';
+import { getTheme } from '../../redux/selectors';
 
 Modal.setAppElement('#root');
 
@@ -16,6 +17,7 @@ export function ContactTableItem({ contact, index }) {
   const windowWidth = window.innerWidth;
   const [modalIsOpen, setIsOpen] = useState(false);
   const subtitle = useRef();
+  const isThemeDark = useSelector(getTheme);
 
   const openModal = () => {
     setIsOpen(true);
@@ -38,36 +40,54 @@ export function ContactTableItem({ contact, index }) {
   };
 
   return (
-    <tr className="border-b-2 border-tableBorderColor">
+    <tr
+      className={`${
+        isThemeDark
+          ? ' border-tableBorderColorDark '
+          : ' border-tableBorderColor '
+      }border-b-2  `}
+    >
       <td
         width="5%"
-        className="p-1 text-center bg-lightPartsColor  md:text-3 ssm:text-1"
+        className={`${
+          isThemeDark ? ' bg-lightPartsColorDark ' : ' bg-lightPartsColor '
+        }p-1 text-cente  md:text-3 ssm:text-1 `}
       >
         {index + 1}
       </td>
       <td
         width="38%"
-        className="p-1 text-center bg-lightPartsColor  md:text-md ssm:text-sm"
+        className={`${
+          isThemeDark ? ' bg-lightPartsColorDark ' : ' bg-lightPartsColor '
+        }p-1 text-center   md:text-md ssm:text-sm  `}
       >
         {contact.name}
       </td>
       <td
         width="42%"
-        className="p-1 text-center bg-lightPartsColor  md:text-md ssm:text-sm"
+        className={`${
+          isThemeDark ? ' bg-lightPartsColorDark ' : ' bg-lightPartsColor '
+        }p-1 text-center   md:text-md ssm:text-sm `}
       >
         {normalizePhoneNumber(contact.phone)}
       </td>
       <td
         width="15%"
-        className="p-1 text-center bg-lightPartsColor  md:text-md ssm:text-sm "
+        className={`${
+          isThemeDark ? ' bg-lightPartsColorDark ' : ' bg-lightPartsColor '
+        } p-1 text-center   md:text-md ssm:text-sm  `}
       >
         <button
           id="delete-btn"
           onClick={openModal}
-          className="bg-buttonColor text-lightPartsColor mx-auto border-none
-           py-1 px-2 min-w-[50px] min-h-[28px] text-xs cursor-pointer transition-all 
-           duration-300 flex text-center items-center hover:bg-buttonHoverColor
-            rounded-sm font-light justify-center sm:min-h-[20px] sm:min-w-[30px]"
+          className={` ${
+            isThemeDark
+              ? ' bg-buttonColorDark hover:bg-buttonHoverColorDark text-lightPartsColorDark hover:text-darkFontDark'
+              : ' bg-buttonColor hover:bg-buttonHoverColor text-lightPartsColor '
+          } mx-auto border-none
+           py-1 px-2 min-w-[50px] min-h-[28px] text-xs cursor-pointer 
+           duration-300 flex text-center items-center 
+            rounded-sm font-light justify-center sm:min-h-[20px] sm:min-w-[30px]`}
         >
           {isLoading ? (
             <PulseLoader color="#F5DEB3" size="2px" />
@@ -79,7 +99,7 @@ export function ContactTableItem({ contact, index }) {
         </button>
       </td>
       <Modal
-        style={settings}
+        style={isThemeDark ? settings2 : settings}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Delete Confirmation"
@@ -87,8 +107,9 @@ export function ContactTableItem({ contact, index }) {
       >
         <h2
           ref={subtitle}
-          className=" text-center text-darkFont  text-2xl md:text-sm 
-          "
+          className={`${
+            isThemeDark ? 'text-darkFontDark' : 'text-darkFont'
+          } text-center   text-2xl md:text-sm `}
         >
           Delete contact{' '}
           <span className="font-bold text-green-700">{contact.name}</span>?
@@ -99,19 +120,27 @@ export function ContactTableItem({ contact, index }) {
         >
           <button
             onClick={handleDelete}
-            className="text-4 bg-deleteBtnColor text-lightPartsColor
-            border-none py-3 px-10 rounded-0.5 cursor-pointer transition-all
-            duration-300 mx-auto hover:bg-deleteBtnHoverColor md:py-2 md:px-5
-             font-light"
+            className={`${
+              isThemeDark
+                ? ' bg-deleteBtnColorDark hover:bg-deleteBtnHoverColorDark text-darkFontDark '
+                : ' bg-deleteBtnColor hover:bg-deleteBtnHoverColor text-lightPartsColor '
+            }text-4  
+            border-none py-3 px-10 rounded-0.5 cursor-pointer 
+            duration-300 mx-auto  md:py-2 md:px-5
+             font-light`}
           >
             Delete
           </button>
           <button
             onClick={closeModal}
-            className="text-4 bg-buttonColor text-lightPartsColor
-            border-none py-3 px-10 rounded-0.5 cursor-pointer transition-all
-            duration-300 mx-auto hover:bg-buttonHoverColor md:py-2 md:px-5
-            font-light "
+            className={`${
+              isThemeDark
+                ? ' bg-buttonColorDark text-darkFontDark hover:text-lightPartsColorDark hover:bg-buttonHoverColorDark '
+                : ' bg-buttonColor text-lightPartsColor hover:bg-buttonHoverColor '
+            }text-4  
+            border-none py-3 px-10 rounded-0.5 cursor-pointer 
+            duration-300 mx-auto  md:py-2 md:px-5
+            font-light `}
           >
             Cancel
           </button>

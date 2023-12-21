@@ -4,7 +4,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { PulseLoader } from 'react-spinners';
 
-import { getContacts, getLoading } from '../../redux/selectors';
+import { getContacts, getLoading, getTheme } from '../../redux/selectors';
 import { postContact } from '../../redux/contacts/mockData-api';
 import { schema } from 'constants';
 import { succesMessage, nameCheckerError } from 'helpers/notiflix';
@@ -12,7 +12,6 @@ import { Input } from '../ContactFormInput/ContactFormInput';
 import normalizePhoneNumber from 'helpers/numberNormalize';
 import normalizeName from 'helpers/nameNormalize';
 
-//Як правильно передавати стейт форміку з локал стореджу персісту?
 const initialValues = {
   name: '',
   phone: '',
@@ -22,6 +21,7 @@ export function ContactForm() {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const isLoading = useSelector(getLoading);
+  const isThemeDark = useSelector(getTheme);
 
   const handleSubmit = (values, { resetForm }) => {
     const { name, phone } = values;
@@ -55,12 +55,15 @@ export function ContactForm() {
     >
       <Form
         autoComplete="off"
-        className="flex gap-2 flex-col w-1/3 py-20 pr-7 pl-5 rounded-sm
-          shadow-lg shadow-shadowBox  bg-gradient-to-tr
-        from-smallWraperGradient1 to-smallWraperGradient2 md:py-7 md:px-5
-        md:min-h-0 md:w-[99%]"
+        className={`${
+          isThemeDark
+            ? ' shadow-shadowBoxDark from-smallWraperGradient1Dark to-smallWraperGradient2Dark '
+            : ' from-smallWraperGradient1 shadow-shadowBox to-smallWraperGradient2 '
+        }  flex gap-2 flex-col w-1/3 py-20 pr-7 pl-5 rounded-sm
+          shadow-lg bg-gradient-to-tr md:py-7 md:px-5 md:min-h-0 md:w-[99%]
+          transition-all ssm:pt-14 `}
       >
-        <h1 className="text-center text-3xl m-0 md:text-xl md2:text-xl font-normal ">
+        <h1 className="text-center text-3xl m-0 md:text-xl md2:text-xl font-normal">
           Add Contact Field
         </h1>
         <Input />
@@ -83,11 +86,15 @@ export function ContactForm() {
         </div>
         <button
           type="submit"
-          className="text-center  font-light w-40 h-11 rounded-sm bg-buttonColor
-           border-none outline-none mx-auto  cursor-pointer shadow-md shadow-shadowBox
-            flex items-center justify-around transition-all duration-300 text-buttonTextColor
-            text-4 hover:bg-buttonHoverColor md:w-40 md:h-11  text-lg md2:w-32
-             md2:text-sm "
+          className={`${
+            isThemeDark
+              ? '  shadow-none hover:bg-buttonHoverColorDark text-buttonTextColorDark hover:text-lightPartsColorDark bg-buttonColorDark '
+              : ' shadow-shadowBox hover:bg-buttonHoverColor text-buttonTextColor bg-buttonColor '
+          } text-center  font-light w-40 h-11 rounded-sm 
+           border-none outline-none mx-auto  cursor-pointer shadow-md 
+            flex items-center  justify-around transition-all duration-30 
+            text-4  md:w-40 md:h-11  text-lg md2:w-32
+             md2:text-sm  sm:justify-self-start sm:mx-0 ssm:mx-auto `}
         >
           {isLoading ? (
             <PulseLoader color="#F5DEB3" size="6px" />

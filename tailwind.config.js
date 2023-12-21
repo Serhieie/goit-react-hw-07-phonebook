@@ -31,6 +31,34 @@ module.exports = {
         filterLabelColor: 'rgb(245, 187, 86)',
         filterPlaceholderColor: 'darkred',
         filterTextColor: 'rgb(114, 76, 9)',
+
+        // Dark Variants
+        shadowBoxDark: 'rgb(33, 85, 164)',
+
+        lightPartsColorDark: 'rgb(7, 33, 78)',
+        darkFontDark: 'rgb(204, 222, 255)',
+
+        gradientColor1Dark: 'rgb(20, 19, 27)',
+        gradientColor2Dark: 'rgb(51, 61, 142)',
+        smallWraperGradient1Dark: 'rgb(22, 26, 40)',
+        smallWraperGradient2Dark: 'rgb(4, 9, 42)',
+
+        buttonColorDark: 'rgb(14, 68, 115)',
+        buttonHoverColorDark: 'rgb(56, 154, 240)',
+        buttonShadowBoxDark: 'rgb(215, 225, 240)',
+        buttonTextColorDark: 'rgb(176, 198, 238)',
+        themeBtnLight: 'rgb(250, 250, 210)',
+
+        errorMsgDark: 'rgb(120, 217, 255)',
+        deleteBtnColorDark: 'rgba(203, 6, 6, 0.4)',
+        deleteBtnHoverColorDark: 'rgba(180, 15, 15, 0.80)',
+
+        tableHeaderBackgroundDark: 'rgb(4, 23, 55)',
+        tableBorderColorDark: 'rgb(0, 3, 22)',
+
+        filterLabelColorDark: 'rgb(2, 13, 84)',
+        filterPlaceholderColorDark: 'rgb(115, 201, 255)',
+        filterTextColorDark: 'rgb(176, 198, 238)',
       },
 
       screens: {

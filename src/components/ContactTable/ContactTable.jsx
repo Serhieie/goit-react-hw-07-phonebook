@@ -6,6 +6,7 @@ import {
   getContacts,
   getLoading,
   getError,
+  getTheme,
 } from '../../redux/selectors';
 
 export function ContactTable() {
@@ -13,6 +14,7 @@ export function ContactTable() {
   const filter = useSelector(getFilterValue);
   const isLoading = useSelector(getLoading);
   const error = useSelector(getError);
+  const isThemeDark = useSelector(getTheme);
 
   //Чи потрібен юз мемо у подібній функції?
   const getVisibleContacts = useMemo(() => {
@@ -40,37 +42,63 @@ export function ContactTable() {
       {error && <p className=" text-center font-light">{error}</p>}
 
       <table
-        className="border-2 border-tableBorderColor border-collapese 
+        className={`${
+          isThemeDark
+            ? 'border-tableBorderColorDark '
+            : 'border-tableBorderColor '
+        } border-2  border-collapese 
       mt-5 mb-5 block mx-auto overflow-auto w-full h-[534px] 
-        ssm:text-xs "
+        ssm:text-xs  `}
       >
         <thead className="text-sm  right-0 left-0 top-0 w-full">
-          <tr className="border-b-2 border-tableBorderColor ">
+          <tr
+            className={`${
+              isThemeDark
+                ? 'border-tableBorderColorDark '
+                : 'border-tableBorderColor '
+            } border-b-2  `}
+          >
             <th
               width="7%"
-              className="items-center bg-tableHeaderBackground 
-          text-darkFont font-bold min-w-4 p-2 md:p-0.5 "
+              className={`${
+                isThemeDark
+                  ? 'bg-tableHeaderBackgroundDark  text-darkFontDark '
+                  : 'bg-tableHeaderBackground text-darkFont '
+              } items-center  
+           font-bold min-w-4 p-2 md:p-0.5 `}
             >
               #
             </th>
             <th
               width="40%"
-              className=" items-center bg-tableHeaderBackground 
-          text-darkFont font-bold min-w-4 p-2 md:p-0.5"
+              className={`${
+                isThemeDark
+                  ? 'bg-tableHeaderBackgroundDark text-darkFontDark '
+                  : 'bg-tableHeaderBackground text-darkFont '
+              } items-center 
+           font-bold min-w-4 p-2 md:p-0.5  `}
             >
               Name
             </th>
             <th
               width="42%"
-              className="items-center bg-tableHeaderBackground 
-          text-darkFont font-bold min-w-4 p-2 md:p-0.5"
+              className={`${
+                isThemeDark
+                  ? 'bg-tableHeaderBackgroundDark text-darkFontDark '
+                  : 'bg-tableHeaderBackground text-darkFont '
+              }items-center  
+           font-bold min-w-4 p-2 md:p-0.5  `}
             >
               Phone Number
             </th>
             <th
               width="15%"
-              className="items-center bg-tableHeaderBackground 
-          text-darkFont font-bold min-w-4 p-2 md:p-0.5"
+              className={`${
+                isThemeDark
+                  ? 'bg-tableHeaderBackgroundDark  text-darkFontDark '
+                  : ' bg-tableHeaderBackground text-darkFont '
+              }items-center  
+           font-bold min-w-4 p-2 md:p-0.5  `}
             >
               Action
             </th>
