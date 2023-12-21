@@ -1,22 +1,27 @@
-import PropTypes from 'prop-types';
-import { Formik, Form } from 'formik';
-import { schema } from 'constants';
-import { succesMessage, nameCheckerError } from '../../helpers/notiflix';
-import { Input } from '../ContactFormInput/ContactFormInput';
+import { useSelector, useDispatch } from 'react-redux';
+import { Formik, Form, ErrorMessage } from 'formik';
+import { nanoid } from '@reduxjs/toolkit';
 import { AiOutlineUserAdd } from 'react-icons/ai';
-import normalizePhoneNumber from '../../helpers/numberNormalize';
-import normalizeName from 'helpers/nameNormalize';
-import { ErrorMessage } from 'formik';
-import { useSelector } from 'react-redux';
-import { getContacts } from '../../redux/selectors';
+import { PulseLoader } from 'react-spinners';
 
+import { getContacts, getLoading } from '../../redux/selectors';
+import { postContact } from '../../redux/contacts/mockData-api';
+import { schema } from 'constants';
+import { succesMessage, nameCheckerError } from 'helpers/notiflix';
+import { Input } from '../ContactFormInput/ContactFormInput';
+import normalizePhoneNumber from 'helpers/numberNormalize';
+import normalizeName from 'helpers/nameNormalize';
+
+//Як правильно передавати стейт форміку з локал стореджу персісту?
 const initialValues = {
   name: '',
   phone: '',
 };
 
-export function ContactForm({ onSubmit }) {
+export function ContactForm() {
+  const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
+  const isLoading = useSelector(getLoading);
 
   const handleSubmit = (values, { resetForm }) => {
     const { name, phone } = values;
@@ -31,9 +36,15 @@ export function ContactForm({ onSubmit }) {
     if (isNameExists) {
       return nameCheckerError();
     }
-    onSubmit(normName, someNum);
+    handleAddContact(normName, someNum);
     succesMessage();
     resetForm();
+  };
+
+  const handleAddContact = (name, phone) => {
+    dispatch(
+      postContact({ id: nanoid(), name, phone: normalizePhoneNumber(phone) })
+    );
   };
 
   return (
@@ -54,8 +65,8 @@ export function ContactForm({ onSubmit }) {
         </h1>
         <Input />
         <div
-          className="w-full flex justify-center font-extralight items-center flex-col h-20 mt-2
-          md:text-base md:h-7 sm"
+          className="w-full flex justify-center font-extralight items-center flex-col 
+          h-20 mt-2 md:text-base md:h-7 text-center"
         >
           <ErrorMessage
             className="text-xl text-errorMsg m-0 p-0 font-extralight items-center 
@@ -72,18 +83,21 @@ export function ContactForm({ onSubmit }) {
         </div>
         <button
           type="submit"
-          className="text-center  font-light w-40 h-11 rounded-sm bg-buttonColor border-none 
-            outline-none mx-auto mt-5 cursor-pointer shadow-md shadow-shadowBox
+          className="text-center  font-light w-40 h-11 rounded-sm bg-buttonColor
+           border-none outline-none mx-auto mt-5 cursor-pointer shadow-md shadow-shadowBox
             flex items-center justify-around transition-all duration-300 text-buttonTextColor
-            text-4 hover:bg-buttonHoverColor md:w-40 md:h-11 md:mt-4 text-lg md2:w-32 md2:text-sm md2:mt-5"
+            text-4 hover:bg-buttonHoverColor md:w-40 md:h-11 md:mt-4 text-lg md2:w-32
+             md2:text-sm md2:mt-5"
         >
-          Add Contact <AiOutlineUserAdd />
+          {isLoading ? (
+            <PulseLoader color="#F5DEB3" size="6px" />
+          ) : (
+            <>
+              Add Contact <AiOutlineUserAdd />
+            </>
+          )}
         </button>
       </Form>
     </Formik>
   );
 }
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func,
-};

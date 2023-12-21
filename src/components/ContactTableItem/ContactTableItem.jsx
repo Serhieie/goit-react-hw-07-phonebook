@@ -1,12 +1,18 @@
 import { useState, useRef } from 'react';
-import normalizePhoneNumber from '../../helpers/numberNormalize';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { AiOutlineUserDelete } from 'react-icons/ai';
 import Modal from 'react-modal';
+import { PulseLoader } from 'react-spinners';
+import normalizePhoneNumber from 'helpers/numberNormalize';
+import { deleteContact } from '../../redux/contacts/mockData-api';
 import { settings } from 'helpers/deleteModalSettings';
 
 Modal.setAppElement('#root');
 
-export function ContactTableItem({ contact, index, onDeleteContact }) {
+export function ContactTableItem({ contact, index }) {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const windowWidth = window.innerWidth;
   const [modalIsOpen, setIsOpen] = useState(false);
   const subtitle = useRef();
@@ -19,9 +25,16 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
     setIsOpen(false);
   };
 
-  const handleDelete = () => {
-    onDeleteContact(contact.id);
-    closeModal();
+  const handleDelete = async () => {
+    setIsOpen(false);
+    setIsLoading(prevLoading => !prevLoading);
+    try {
+      await dispatch(deleteContact(contact.id));
+      setIsLoading(prevLoading => !prevLoading);
+    } catch (error) {
+      setIsLoading(prevLoading => !prevLoading);
+      throw new Error(error.message);
+    }
   };
 
   return (
@@ -46,15 +59,19 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
       </td>
       <td
         width="15%"
-        className="p-1 text-center bg-lightPartsColor  md:text-md ssm:text-sm"
+        className="p-1 text-center bg-lightPartsColor  md:text-md ssm:text-sm "
       >
         <button
           id="delete-btn"
           onClick={openModal}
-          className="bg-buttonColor text-lightPartsColor mx-auto border-none py-1 px-2 text-xs cursor-pointer
-          transition-all duration-300 flex items-center hover:bg-buttonHoverColor rounded-sm font-light"
+          className="bg-buttonColor text-lightPartsColor mx-auto border-none
+           py-1 px-2 min-w-[50px] min-h-[28px] text-xs cursor-pointer transition-all 
+           duration-300 flex text-center items-center hover:bg-buttonHoverColor
+            rounded-sm font-light justify-center"
         >
-          {windowWidth < 768 ? (
+          {isLoading ? (
+            <PulseLoader color="#F5DEB3" size="2px" />
+          ) : windowWidth < 768 ? (
             <AiOutlineUserDelete style={{ marginRight: '4px' }} />
           ) : (
             'Delete'
@@ -66,7 +83,7 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Delete Confirmation"
-        className="md:w-[320px]"
+        className="md:w-[340px]"
       >
         <h2
           ref={subtitle}
@@ -103,3 +120,15 @@ export function ContactTableItem({ contact, index, onDeleteContact }) {
     </tr>
   );
 }
+
+const ContactType = {
+  createdAt: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+};
+
+ContactTableItem.propTypes = {
+  contact: PropTypes.shape(ContactType).isRequired,
+  index: PropTypes.number,
+};

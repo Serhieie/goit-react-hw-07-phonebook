@@ -3,16 +3,33 @@ import { fetchContacts, postContact, deleteContact } from './mockData-api';
 import { initialState } from './initial';
 
 const handlePending = state => {
-  state.isLoading = true;
+  return { ...state, isLoading: true };
 };
 const handleFulfilled = (state, action) => {
-  state.isLoading = false;
-  state.items = action.payload;
-  state.error = null;
+  return { ...state, isLoading: false, error: null, items: action.payload };
 };
 const handleRejected = (state, action) => {
-  state.isLoading = false;
-  state.error = action.payload;
+  return {
+    ...state,
+    isLoading: false,
+    error: action.payload,
+  };
+};
+const handlePostContact = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    error: null,
+    items: [action.payload, ...state.items],
+  };
+};
+const handleDeleteContact = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    error: null,
+    items: state.items.filter(item => item.id !== action.payload.id),
+  };
 };
 
 const contactsSlice = createSlice({
@@ -27,11 +44,11 @@ const contactsSlice = createSlice({
       .addCase(fetchContacts.rejected, handleRejected)
       //PostContact
       .addCase(postContact.pending, handlePending)
-      .addCase(postContact.fulfilled, handleFulfilled)
+      .addCase(postContact.fulfilled, handlePostContact)
       .addCase(postContact.rejected, handleRejected)
       //DeleteContact
       .addCase(deleteContact.pending, handlePending)
-      .addCase(deleteContact.fulfilled, handleFulfilled)
+      .addCase(deleteContact.fulfilled, handleDeleteContact)
       .addCase(deleteContact.rejected, handleRejected);
   },
 });
