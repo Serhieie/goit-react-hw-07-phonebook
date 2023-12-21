@@ -33,7 +33,7 @@ export function ContactTable() {
   }, [contacts, filter]);
 
   return (
-    <div className="overflow-x-auto w-full">
+    <div className="overflow-x-auto w-[92%]">
       {!contacts?.length && !error && !isLoading && (
         <p className=" text-center font-light">No contacts found.</p>
       )}
@@ -41,7 +41,7 @@ export function ContactTable() {
 
       <table
         className="border-2 border-tableBorderColor border-collapese 
-      mt-5 mb-5 block mx-auto overflow-auto min-w-full h-[534px] 
+      mt-5 mb-5 block mx-auto overflow-auto w-full h-[534px] 
         ssm:text-xs "
       >
         <thead className="text-sm  right-0 left-0 top-0 w-full">
@@ -76,7 +76,7 @@ export function ContactTable() {
             </th>
           </tr>
         </thead>
-        <tbody className="max-h-fit max-w-full text-lg sm:text-sm md2:text-base">
+        <tbody className="max-h-fit max-w-full text-lg sm:text-sm md2:text-base  select-text">
           {getVisibleContacts.map((contact, index) => (
             <ContactTableItem
               key={contact.id}

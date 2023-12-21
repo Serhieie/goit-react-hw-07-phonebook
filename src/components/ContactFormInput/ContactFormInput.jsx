@@ -18,10 +18,10 @@ export function Input() {
         name="name"
         id="name"
         placeholder="Enter name"
-        className="text-center mx-auto w-11/12 py-1 px-5 rounded-sm h-8
+        className="text-center mx-auto w-11/12 py-1 px-5 rounded-sm h-9
          bg-lightPartsColor border-0 outline-none  text-4 text-darkFont
           placeholder:text-darkFont placeholder:font-extralight
-         md:w-10/12  md:text-4 md:h-9 md:py-0.5 md:px-2 placeholder:opacity-50 
+         md:w-10/12  md:text-4 md:h-8 md:py-0.5 md:px-2 placeholder:opacity-50 
          md2:text-2 ssm:text-xs md2:text-xs font-light"
       />
       <label
@@ -37,9 +37,9 @@ export function Input() {
         name="phone"
         id="phone"
         placeholder="Enter phone number"
-        className="text-center w-11/12 py-1 px-5 rounded-sm h-8 bg-lightPartsColor 
+        className="text-center w-11/12 py-1 px-5 rounded-sm h-9 bg-lightPartsColor 
         border-0 outline-none mx-auto text-4 text-darkFont placeholder:text-darkFont 
-        md:w-10/12  md:text-4 md:h-9 md:py-0.5 md:px-2 placeholder:opacity-50 
+        md:w-10/12  md:text-4 md:h-8 md:py-0.5 md:px-2 placeholder:opacity-50 
         md2:text-2 ssm:text-xs md2:text-xs placeholder:font-extralight font-light"
       />
     </>
