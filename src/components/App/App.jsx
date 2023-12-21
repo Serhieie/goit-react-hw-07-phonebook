@@ -16,7 +16,7 @@ export function App() {
   return (
     <div
       className="flex gap-4 sm:gap-0 justify-around mx-auto 
-    w-9/12 mt-5 p-8 sm:p-2 rounded shadow-xl shadow-shadowBox
+    w-9/12 mt-6 p-8 sm:p-2 rounded shadow-xl shadow-shadowBox
     md:flex-col md:items-center md:text-base  md:px-1.5 md:w-11/12
     text-xl text-darkFont min-h-562 select-none bg-gradient-to-tr
      from-gradientColor1 to-gradientColor2 sm:mt-1"
@@ -26,7 +26,7 @@ export function App() {
         className="w-8/12 flex justify-center items-center flex-col 
       px-5 pr-4 rounded-sm shadow-lg shadow-shadowBox min-h-562
       select-none bg-gradient-to-tr from-smallWraperGradient1
-      to-smallWraperGradient2 relative md:mt-3 md:py-7 md:px-5 md:w-11/12"
+      to-smallWraperGradient2 relative md:mt-3 md:py-7 md:px-1 md2:px-2 md:w-11/12"
       >
         <TbUserSearch
           className="absolute w-4 h-4 top-9 left-1/4 opacity-40 

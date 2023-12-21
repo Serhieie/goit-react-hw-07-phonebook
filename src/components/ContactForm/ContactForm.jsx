@@ -84,10 +84,10 @@ export function ContactForm() {
         <button
           type="submit"
           className="text-center  font-light w-40 h-11 rounded-sm bg-buttonColor
-           border-none outline-none mx-auto mt-5 cursor-pointer shadow-md shadow-shadowBox
+           border-none outline-none mx-auto  cursor-pointer shadow-md shadow-shadowBox
             flex items-center justify-around transition-all duration-300 text-buttonTextColor
-            text-4 hover:bg-buttonHoverColor md:w-40 md:h-11 md:mt-4 text-lg md2:w-32
-             md2:text-sm md2:mt-5"
+            text-4 hover:bg-buttonHoverColor md:w-40 md:h-11  text-lg md2:w-32
+             md2:text-sm "
         >
           {isLoading ? (
             <PulseLoader color="#F5DEB3" size="6px" />

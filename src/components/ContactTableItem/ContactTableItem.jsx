@@ -67,7 +67,7 @@ export function ContactTableItem({ contact, index }) {
           className="bg-buttonColor text-lightPartsColor mx-auto border-none
            py-1 px-2 min-w-[50px] min-h-[28px] text-xs cursor-pointer transition-all 
            duration-300 flex text-center items-center hover:bg-buttonHoverColor
-            rounded-sm font-light justify-center"
+            rounded-sm font-light justify-center sm:min-h-[20px] sm:min-w-[30px]"
         >
           {isLoading ? (
             <PulseLoader color="#F5DEB3" size="2px" />
@@ -111,7 +111,7 @@ export function ContactTableItem({ contact, index }) {
             className="text-4 bg-buttonColor text-lightPartsColor
             border-none py-3 px-10 rounded-0.5 cursor-pointer transition-all
             duration-300 mx-auto hover:bg-buttonHoverColor md:py-2 md:px-5
-            font-light"
+            font-light "
           >
             Cancel
           </button>
