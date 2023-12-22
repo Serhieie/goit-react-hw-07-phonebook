@@ -20,7 +20,7 @@ export const persistedFormSlice = createSlice({
 const persistConfig = {
   key: 'form',
   storage,
-  blacklist: ['contacts', 'filter'],
+  blacklist: ['contacts', 'filter', 'theme'],
 };
 
 export const persistedFormReducer = persistReducer(
