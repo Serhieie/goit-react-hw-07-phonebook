@@ -1,11 +1,8 @@
 import { LiaUserEditSolid } from 'react-icons/lia';
 import { FiPhoneMissed } from 'react-icons/fi';
-import { getTheme } from '../../redux/selectors';
-import { useSelector } from 'react-redux';
 import { Field } from 'formik';
 
-export function Input() {
-  const isThemeDark = useSelector(getTheme);
+export function Inputs({ isThemeDark }) {
   return (
     <>
       <label
@@ -25,11 +22,11 @@ export function Input() {
           isThemeDark
             ? ' text-darkFontDark bg-sky-900 placeholder:text-darkFontDark '
             : ' text-darkFont bg-lightPartsColor placeholder:text-darkFont '
-        }text-center mx-auto w-11/12 py-1 px-5 rounded-sm h-9
-          border-0 outline-none  text-4
+        }text-center mx-auto w-11/12 py-1 px-5 rounded-sm h-12 
+          border-0 outline-none   
            placeholder:font-extralight
-         md:w-10/12  md:text-4 md:h-8 md:py-0.5 md:px-2 placeholder:opacity-50 
-         md2:text-2 ssm:text-xs md2:text-xs font-light  transition-all`}
+         md:w-10/12    md:h-10 text-xl md:py-0.5 md:px-2 placeholder:opacity-50 
+           ssm:text-base  font-light  transition-all  2xl2:text-2xl`}
       />
       <label
         htmlFor="phone"
@@ -48,10 +45,10 @@ export function Input() {
           isThemeDark
             ? ' text-darkFontDark bg-sky-900 placeholder:text-darkFontDark  '
             : ' text-darkFont bg-lightPartsColor placeholder:text-darkFont  '
-        } text-center w-11/12 py-1 px-5 rounded-sm h-9 
-        border-0 outline-none mx-auto text-4  
-        md:w-10/12  md:text-4 md:h-8 md:py-0.5 md:px-2 placeholder:opacity-50 
-        md2:text-2 ssm:text-xs md2:text-xs placeholder:font-extralight font-light  transition-all`}
+        } text-center w-11/12 py-1 px-5 rounded-sm h-12 
+        border-0 outline-none mx-auto  
+        md:w-10/12  text-xl md:h-10 md:py-0.5 md:px-2 placeholder:opacity-50 
+        ssm:text-base  placeholder:font-extralight font-light  transition-all 2xl2:text-2xl`}
       />
     </>
   );

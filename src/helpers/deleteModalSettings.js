@@ -46,7 +46,7 @@ const settings2 = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     border: '1px solid #ccc',
-    background: 'rgb(2, 13, 84)',
+    background: 'rgb(4, 23, 55)',
     overflow: 'auto',
     WebkitOverflowScrolling: 'touch',
     borderRadius: '4px',

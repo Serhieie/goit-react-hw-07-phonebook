@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './rootReducer';
+import rootReducer from './redux-bundle/rootReducer';
+import { contactsApi } from './rtk-apiService/rtkq-api';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 import {
   persistStore,
@@ -18,7 +20,8 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(contactsApi.middleware),
 });
 
 export const persistor = persistStore(store);
+setupListeners(store.dispatch);

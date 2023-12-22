@@ -70,6 +70,7 @@ module.exports = {
         ssm: { max: '375px' },
         sm2: { min: '640px', max: '767px' },
         md2: { min: '768px', max: '1023px' },
+        md3: { min: '768px' },
         mmd2: { min: '900px', max: '1265px' },
         lg2: { min: '1024px', max: '1279px' },
         xl2: { min: '1280px', max: '1535px' },
