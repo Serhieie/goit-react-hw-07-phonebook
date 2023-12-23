@@ -4,7 +4,10 @@ import { succesMessage, nameCheckerError } from 'helpers/notiflix';
 import { Inputs } from './ContactFormInput/ContactFormInput';
 import normalizePhoneNumber from 'helpers/numberNormalize';
 import normalizeName from 'helpers/nameNormalize';
-import { usePostContactMutation } from '../../redux/rtk-apiService/rtkq-api';
+import {
+  usePostContactMutation,
+  useGetAllContactsQuery,
+} from '../../redux/rtk-apiService/rtkq-api';
 import { FormButton } from './FormButton/FormButton';
 import { ErrorMessages } from './ErrorMessages/ErrorMessages';
 
@@ -14,7 +17,8 @@ const initialValues = {
 };
 
 export function ContactForm({ isThemeDark }) {
-  const [addContact, { data, isLoading }] = usePostContactMutation();
+  const { data } = useGetAllContactsQuery();
+  const [addContact, { isLoading }] = usePostContactMutation();
 
   const handleSubmit = (values, { resetForm }) => {
     const { name, phone } = values;
@@ -22,15 +26,22 @@ export function ContactForm({ isThemeDark }) {
     let someNum = normalizePhoneNumber(phone);
     let normName = normalizeName(name);
 
+    // Перевіряємо чи існує контакт з таким самим ім'ям
     const isNameExists =
       Array.isArray(data) &&
-      data.some(
-        contact => contact.name.toLowerCase() === normName.toLowerCase()
-      );
+      data.some(contact => {
+        return contact.name.toLowerCase() === normName.toLowerCase();
+      });
+    const isPhoneExists =
+      Array.isArray(data) &&
+      data.some(contact => {
+        return normalizePhoneNumber(contact.phone) === someNum;
+      });
 
-    if (isNameExists) {
+    if (isNameExists && isPhoneExists) {
       return nameCheckerError();
     }
+
     addContact({ name: normName, phone: someNum });
     succesMessage();
     resetForm();

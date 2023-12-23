@@ -20,7 +20,7 @@ function succesMessage() {
 }
 
 function nameCheckerError() {
-  return Notiflix.Notify.failure('Contact with this name already exists');
+  return Notiflix.Notify.failure('Contact already exists');
 }
 
 export { succesMessage, nameCheckerError };

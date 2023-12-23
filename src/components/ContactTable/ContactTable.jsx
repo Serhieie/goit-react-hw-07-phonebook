@@ -1,4 +1,3 @@
-//RTK QUERY
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { ContactTableItem } from './ContactTableItem/ContactTableItem';
@@ -11,7 +10,6 @@ export function ContactTable() {
   const filter = useSelector(getFilterValue);
   const isThemeDark = useSelector(getTheme);
 
-  //Чи потрібен юз мемо у подібній функції?
   const getVisibleContacts = useMemo(() => {
     const normalizedFilter = filter.toLowerCase();
     if (!Array.isArray(data)) {
@@ -32,28 +30,37 @@ export function ContactTable() {
 
   return (
     <div className="overflow-x-auto w-[92%]">
-      {!data?.length && !error && !isLoading && (
-        <p className=" text-center font-light">No contacts found.</p>
-      )}
-      {error && <p className=" text-center font-light">{error}</p>}
+      <div className="h-6">
+        {isLoading && !data && (
+          <p className="text-center font-light text-xs ">Loading...</p>
+        )}
+
+        {error && (
+          <p className="text-center font-light  text-base">
+            No contacts found.
+          </p>
+        )}
+      </div>
+
       <table
         className={`${
           isThemeDark
             ? 'border-tableBorderColorDark '
             : 'border-tableBorderColor '
         } border-2  border-collapese 
-      mt-5 mb-5 block mx-auto overflow-auto w-full h-[534px] 
+        mt-5 mb-5 block mx-auto overflow-auto w-full h-[534px] 
         ssm:text-xs `}
       >
         <TableHead isThemeDark={isThemeDark} />
         <tbody className="max-h-fit max-w-full text-xl sm:text-sm md2:text-sm ssm:text-xs  select-text">
-          {getVisibleContacts.map((contact, index) => (
-            <ContactTableItem
-              key={contact.id}
-              contact={contact}
-              index={index}
-            />
-          ))}
+          {!error &&
+            getVisibleContacts.map((contact, index) => (
+              <ContactTableItem
+                key={contact.id}
+                contact={contact}
+                index={index}
+              />
+            ))}
         </tbody>
       </table>
     </div>

@@ -8,7 +8,7 @@ import { ModalFordelete } from './ModalForDelete';
 import { useState } from 'react';
 import { useDeleteContactMutation } from '../../../redux/rtk-apiService/rtkq-api';
 
-export function ContactTableItem({ contact, index }) {
+export function ContactTableItem({ contact, index, data }) {
   const isThemeDark = useSelector(getTheme);
   const windowWidth = window.innerWidth;
   const [modalIsOpen, setIsOpen] = useState(false);
