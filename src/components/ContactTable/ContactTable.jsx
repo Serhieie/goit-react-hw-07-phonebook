@@ -32,12 +32,16 @@ export function ContactTable() {
     <div className="overflow-x-auto w-[92%]">
       <div className="h-6">
         {isLoading && !data && (
-          <p className="text-center font-light text-xs ">Loading...</p>
+          <p className="text-center font-light text-xs">Loading...</p>
+        )}
+
+        {!isLoading && data && data.length === 0 && (
+          <p className="text-center font-light text-base">No contacts found.</p>
         )}
 
         {error && (
-          <p className="text-center font-light  text-base">
-            No contacts found.
+          <p className="text-center font-light text-base">
+            Error fetching contacts. Please try again later.
           </p>
         )}
       </div>
